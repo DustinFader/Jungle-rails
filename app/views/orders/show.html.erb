@@ -15,7 +15,7 @@
   <section class="orders-show">
 
   <% @order.line_items.each do |line_item| %>
-    <div class="card" style="width:50rem;">
+    <article class="card">
       <div class="card-body">
         <%= image_tag line_item.product.image_url, :class => "card-img-top", :alt => "image of plant" if line_item.product.image_url.present? %>
         <h3 class="card-title" >Name: <%= line_item.product.name %></h3>
@@ -23,7 +23,7 @@
         <p>Quantity: <%= line_item.quantity %></p>
         <p>Total: <%= humanized_money_with_symbol line_item.total_price_cents / 100.00 %></p>
       </div>
-    </div>
+    </article>
   <% end %>
   
   Cart Total: <%= humanized_money_with_symbol @order.total_cents / 100.00 %><br/>
