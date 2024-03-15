@@ -43,6 +43,20 @@
         </li> %>
       </ul>
       <ul class="navbar-nav">
+      <% if !current_user %>
+        <li class="nav-item">
+          <%= link_to 'Login', '/login', class: "nav-link" %>
+        <li>
+        <li class="nav-item">
+          <%= link_to 'Registration', '/signup', class: "nav-link" %>
+        <li>
+      <% else %>
+        <li class="nav-item">
+          <span class="nav-link">
+            Signed in as <%= current_user.first_name %>: <%= link_to "Logout", '/logout' %>
+          </span>
+        <li>
+      <% end %>
         <li class="nav-item">
           <%= link_to 'About Us', '/about', class: "nav-link" %>
         <li>
