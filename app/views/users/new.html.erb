@@ -2,11 +2,14 @@
 
 <%= form_for :user, url: '/users' do |f| %>
 
-  First Name: <%= f.text_field :first_name, placeholder: "First Name" %>
-  Last Name: <%= f.text_field :last_name, placeholder: "Last Name" %>
-  Email: <%= f.text_field :email, placeholder: "Email" %>
+    First Name: <%= f.text_field :first_name, placeholder: "First Name" %>
+    Last Name: <%= f.text_field :last_name, placeholder: "Last Name" %>
+  <div>
+    Email: <%= f.text_field :email, placeholder: "Email" %>
+    <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+  </div>
   Password: <%= f.password_field :password, placeholder: "Password" %>
   Password Confirmation: <%= f.password_field :password_confirmation, placeholder: "Confirm Password" %>
-  <%= f.submit "Submit" %>
+  <%= f.submit "Submit", class: "btn btn-primary" %>
 
 <% end %>
