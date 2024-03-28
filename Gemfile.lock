@@ -311,6 +311,7 @@ DEPENDENCIES
   jquery-rails
   listen (~> 3.3)
   money-rails
+  net-smtp
   pg
   puma (~> 5.0)
   rack-mini-profiler (~> 2.0)
