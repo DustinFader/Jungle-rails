@@ -2,10 +2,9 @@ require 'rails_helper'
 
 RSpec.describe User, type: :model do
     describe 'validations' do
-      before(:each) do
-        User.create!(first_name: 'Jane', last_name: 'Doe', email: 'test@blast.com', password: 'randinton', password_confirmation: 'randinton')
-      end
-
+      
+      let!(:user) { User.create!(first_name: 'Jane', last_name: 'Doe', email: 'test@blast.com', password: 'randinton', password_confirmation: 'randinton') }
+      
       it 'pass all validations' do
         user = User.new(first_name: 'rand', last_name: 'rand', email: 'TEST@TEST.com', password: 'randinton', password_confirmation: 'randinton')
         expect(user).to be_valid
@@ -55,8 +54,31 @@ RSpec.describe User, type: :model do
     end
 
     describe '.authenticate_with_credentials' do
-      it '' do
+      let!(:user) { User.create!(first_name: 'Jane', last_name: 'Doe', email: 'test@blast.com', password: 'randinton', password_confirmation: 'randinton') }
       
+      it 'authenticate user with valid credentials' do
+        authenticated_user = User.authenticate_with_credentials('test@blast.com', 'randinton')
+        expect(authenticated_user).to eq(user)
+      end
+
+      it 'authenticate user with valid credentials with different email case' do
+        authenticated_user = User.authenticate_with_credentials('tEst@Blast.com', 'randinton')
+        expect(authenticated_user).to eq(user)
+      end
+
+      it 'authenticate user with valid credentials despite white space' do
+        authenticated_user = User.authenticate_with_credentials('  test@blast.com', 'randinton')
+        expect(authenticated_user).to eq(user)
+      end
+
+      it 'fails to authenticate user with valid email' do
+        authenticated_user = User.authenticate_with_credentials('test@porch.com', 'randinton')
+        expect(authenticated_user).to_not eq(user)
+      end
+
+      it 'fails to authenticate user with valid password' do
+        authenticated_user = User.authenticate_with_credentials('test@blast.com', 'password123')
+        expect(authenticated_user).to_not eq(user)
       end
     end
 end
