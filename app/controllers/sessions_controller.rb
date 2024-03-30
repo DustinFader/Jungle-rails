@@ -14,7 +14,7 @@ class SessionsController < ApplicationController
     else
     # If user's login doesn't work, renew login form.
       flash.now[:alert] = 'Invalid email/password combination'
-      render: new
+      render :new
     end
   end
 
